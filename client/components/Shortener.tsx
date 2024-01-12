@@ -96,6 +96,9 @@ const Shortener = () => {
       const link = await submit({ ...formState.values, reCaptchaToken });
       setLink(link);
       formState.clear();
+
+      formState.setField('domain', domains[0].address);
+      formState.setField("showAdvanced", isAuthenticated);
     } catch (err) {
       setMessage(
         err?.response?.data?.error || "Couldn't create the short link."
