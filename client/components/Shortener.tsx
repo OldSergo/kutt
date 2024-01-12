@@ -1,7 +1,7 @@
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useFormState } from "react-use-form-state";
 import { Flex } from "reflexbox/styled-components";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import getConfig from "next/config";
 
@@ -72,17 +72,24 @@ const Shortener = () => {
   const [formState, { raw, password, text, select, label }] = useFormState<
     Form
   >(
-    { showAdvanced: false },
+    { showAdvanced: isAuthenticated },
     {
       withIds: true,
       onChange(e, stateValues, nextStateValues) {
         if (stateValues.showAdvanced && !nextStateValues.showAdvanced) {
           formState.clear();
           formState.setField("target", stateValues.target);
+          formState.setField("showAdvanced", isAuthenticated);
         }
       }
     }
   );
+
+  useEffect(() => {
+    if (domains.length > 0) {
+      formState.setField('domain', domains[0].address);
+    }
+  }, [domains]);
 
   const submitLink = async (reCaptchaToken?: string) => {
     try {
@@ -130,7 +137,7 @@ const Shortener = () => {
 
   const title = !link && (
     <H1 fontSize={[25, 27, 32]} light>
-      Kutt your links{" "}
+      Kutt your penes{" "}
       <Span style={{ borderBottom: "2px dotted #999" }} light>
         shorter
       </Span>
@@ -290,7 +297,7 @@ const Shortener = () => {
               <TextInput
                 {...text("customurl")}
                 placeholder="Custom address..."
-                autocomplete="off"
+                autoComplete="off"
                 data-lpignore
                 pl={[3, 24]}
                 pr={[3, 24]}
@@ -313,7 +320,7 @@ const Shortener = () => {
               <TextInput
                 {...password("password")}
                 placeholder="Password..."
-                autocomplete="off"
+                autoComplete="new-password"
                 data-lpignore
                 pl={[3, 24]}
                 pr={[3, 24]}
