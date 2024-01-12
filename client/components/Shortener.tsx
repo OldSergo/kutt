@@ -97,7 +97,9 @@ const Shortener = () => {
       setLink(link);
       formState.clear();
 
-      formState.setField('domain', domains[0].address);
+      if (domains.length > 0) {
+        formState.setField('domain', domains[0].address);
+      }
       formState.setField("showAdvanced", isAuthenticated);
     } catch (err) {
       setMessage(
