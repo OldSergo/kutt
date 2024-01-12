@@ -297,30 +297,6 @@ const Shortener = () => {
               <TextInput
                 {...text("customurl")}
                 placeholder="Custom address..."
-                autoComplete="off"
-                data-lpignore
-                pl={[3, 24]}
-                pr={[3, 24]}
-                placeholderSize={[13, 14]}
-                fontSize={[14, 15]}
-                height={[40, 44]}
-                width={[1, 210, 240]}
-              />
-            </Col>
-            <Col ml={[0, 24]}>
-              <Text
-                as="label"
-                {...label("password")}
-                fontSize={[14, 15]}
-                mb={2}
-                bold
-              >
-                Password:
-              </Text>
-              <TextInput
-                {...password("password")}
-                placeholder="Password..."
-                autoComplete="new-password"
                 data-lpignore
                 pl={[3, 24]}
                 pr={[3, 24]}
